@@ -1,0 +1,113 @@
+.expl-navBar{
+	list-style: none;
+	width: 100%;
+	margin:0px;
+	padding:2px;
+}
+
+.expl-navBar li{
+	display:inline-block;
+	padding:0px;
+	margin-right: 5px;
+}
+
+.expl-navBar li a{
+	text-align: center;
+	padding: 4px;
+}
+
+.expl-btn-up {
+	display:block;
+	border: 1px solid #ccc;
+	font-size:0.8em;
+	text-decoration:none;
+	background: #eee;
+	color: #3e3e3e;
+	background-image: -webkit-gradient(linear,left top,left bottom,from( #f0f0f0 ),to( #ddd ));
+	background-image: -webkit-linear-gradient( #f0f0f0,#ddd );
+	background-image: -moz-linear-gradient( #f0f0f0,#ddd );
+	background-image: -ms-linear-gradient( #f0f0f0,#ddd );
+	background-image: -o-linear-gradient( #f0f0f0,#ddd );
+	background-image: linear-gradient( #f0f0f0,#ddd );
+}
+
+.expl-navBar li:last-child a{ font-weight: bold }
+
+.expl-btn-hover{ 
+	border: 1px solid #bbb;
+	background: #dfdfdf;
+	font-size:0.8em;
+	text-decoration:none;
+	color: #222;
+	background-image: -webkit-gradient(linear,left top,left bottom,from( #f6f6f6 ),to( #e0e0e0 ));
+	background-image: -webkit-linear-gradient( #f6f6f6,#e0e0e0 );
+	background-image: -moz-linear-gradient( #f6f6f6,#e0e0e0 );
+	background-image: -ms-linear-gradient( #f6f6f6,#e0e0e0 );
+	background-image: -o-linear-gradient( #f6f6f6,#e0e0e0 );
+	background-image: linear-gradient( #f6f6f6,#e0e0e0 );
+}
+
+.expl-btn-down{
+	border: 1px solid #bbb;
+	background: #d6d6d6;
+	color: #222;
+	background-image: -webkit-gradient(linear,left top,left bottom,from( #d0d0d0 ),to( #dfdfdf ));
+	background-image: -webkit-linear-gradient( #d0d0d0,#dfdfdf );
+	background-image: -moz-linear-gradient( #d0d0d0,#dfdfdf );
+	background-image: -ms-linear-gradient( #d0d0d0,#dfdfdf );
+	background-image: -o-linear-gradient( #d0d0d0,#dfdfdf );
+	background-image: linear-gradient( #d0d0d0,#dfdfdf );
+}
+
+.expl-liste{
+	list-style: none;
+	width:100%;
+	border-top: 1px solid #ccc;
+	margin:0px;
+	padding: 0px;
+}
+
+.expl-folder, .expl-file{
+	height:50px;
+	width:100%;
+	border-bottom: 1px solid #ccc;
+}
+
+.expl-folder a, .expl-file a{
+	display:block;
+	text-decoration: none;
+	position:relative;
+	color: #3e3e3e;
+	width:100%;
+	height:50px;
+}
+
+.expl-folder a:hover, .expl-file a:hover{
+	background-color: rgb(240, 240, 240);
+}
+
+.expl-folderName, .expl-fileName{
+	position: relative;
+	margin-left: 51px;
+	font-size: 0.9em;
+	top:10px;
+	display:block;
+}
+
+.expl-fileDesc, .expl-folderDesc{
+	position: relative;
+	margin-left: 51px;
+	font-size: 0.8em;
+	top:10px;
+	display:block;
+	color: grey;
+	font-style: italic;
+}
+
+.expl-icon-folder{position:absolute; top:10px; left:10px; display:inline-block; width:31px; height:31px; background: url(images/folder.png); background-repeat: no-repeat; background-size: 31px 31px;}
+.expl-icon-pdf{position:absolute; top:10px; left:10px; display:inline-block; width:31px; height:31px; background: url(images/pdf.png); background-repeat: no-repeat; background-size: 31px 31px;}
+.expl-icon-pic{position:absolute; top:10px; left:10px; display:inline-block; width:31px; height:31px; width:31px; height:31px;}
+.expl-icon-doc{position:absolute; top:10px; left:10px; display:inline-block; width:31px; height:31px; background: url(images/doc.png); background-repeat: no-repeat; background-size: 31px 31px;}
+.expl-icon-xls{position:absolute; top:10px; left:10px; display:inline-block; width:31px; height:31px; background: url(images/xls.png); background-repeat: no-repeat; background-size: 31px 31px;}
+.expl-icon-zik{position:absolute; top:12px; left:10px; display:inline-block; width:31px; height:31px; background: url(images/zik.png); background-repeat: no-repeat; background-size: 31px 31px;}
+.expl-icon-default{position:absolute; top:10px; left:10px; display:inline-block; width:31px; height:31px; background: url(images/default.png); background-repeat: no-repeat; background-size: 31px 31px;}
