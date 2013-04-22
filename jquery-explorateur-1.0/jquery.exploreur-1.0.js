@@ -16,10 +16,8 @@
 		
 	};
 
-	$.Explorer.defaults = {
-		//Size: width and height in pixel of an icon 
-		size: "40",
-		//This is for exemple you can modify it*/
+	$.Explorer.defaults = { 
+		//This is an exemple */
 		explData: {
 					"name": "root",
 					"description":"This is a description",
@@ -34,9 +32,9 @@
 								{
 									"files":
 									[
-										{"name":"file4.jpg", "description":"Picture of me roaming", "link":"#"},
-										{"name":"file5.bmp", "description":"Picture of me coding", "link":"#"},
-										{"name":"file6.png", "description":"Picture of me sleeping", "link":"#"},
+										{"name":"file4.jpg", "description":"Picture of me roaming", "link":"file4.jpg"},
+										{"name":"file5.bmp", "description":"Picture of me coding", "link":"file5.bmp"},
+										{"name":"file6.png", "description":"Picture of me sleeping", "link":"file6.png"},
 									]
 								}
 							},
@@ -47,22 +45,23 @@
 								{
 									"files":
 									[
-										{"name":"file4.jpg", "description":"Picture of me roaming", "link":"#"},
-										{"name":"file5.bmp", "description":"Picture of me coding", "link":"#"},
-										{"name":"file6.png", "description":"Picture of me sleeping", "link":"#"},
+										{"name":"file4.jpg", "description":"Picture of me roaming", "link":"file4.jpg"},
+										{"name":"file5.bmp", "description":"Picture of me coding", "link":"file5.bmp"},
+										{"name":"file6.png", "description":"Picture of me sleeping", "link":"file6.png"},
 									]
 								}
 							},
 						],
 						"files":
 						[
-							{"name":"file1.pdf", "description":"Picture of me snoozing", "link":"#"},
-							{"name":"file2.doc", "description":"Picture of me jumping", "link":"#"},
-							{"name":"file3.jpg", "description":"Picture of me eating", "link":"#"},
+							{"name":"file1.pdf", "description":"Picture of me snoozing", "link":"file1.pdf"},
+							{"name":"file2.doc", "description":"Picture of me jumping", "link":"file2.doc"},
+							{"name":"file3.jpg", "description":"Picture of me eating", "link":"file3.jpg"},
 						]
 					}
 				},
-		onLastItemClick : function( itemProperties ) { return false; }
+		onItemClick : function($el) { return false; },
+		AfterExplore : function() { return false; }, 
 	};
 
 	$.Explorer.prototype = {
@@ -74,9 +73,9 @@
 
 			this.explData = this.options.explData;
 			this.root = this.explData;
-			this.navBar = new Array();
-			this.exploreFolder("root");
 
+			this.navBar = new Array();
+			this.exploreFolder(this.root.name);
 		},
 		_generateTemplate : function ( callback ){
 
@@ -94,9 +93,11 @@
 
 			var html = '<ul class="expl-navBar">';
 
-			for (var folder in this.navBar)
-				html += '<li class="expl-navBar-folder"><a href="#" class="expl-btn expl-btn-up">' + this.navBar[folder] + '</a></li>';
-
+			for (var i = (this.navBar.length - 5 < 0) ? 0 : this.navBar.length - 5; i < this.navBar.length; i++)
+			{
+				var addData = (this.navBar[i].length > 8) ? this.navBar[i].substr(0, 7) + "..." : this.navBar[i];
+				html += '<li class="expl-navBar-folder" data-name="' + this.navBar[i] +'"><a href="#" class="expl-btn expl-btn-up">' + addData + '</a></li>';
+			}
 			html += '</ul>';
 			return html;
 
@@ -116,8 +117,8 @@
 				$.each(this.root.items.files, function(i, item){
 
 					var classe;
-					var type = item.name.substr(item.name.lastIndexOf("."));
-
+					var type = item.link.substr(item.link.lastIndexOf("."));
+					
 					//Set icon for each type
 					if (type == ".pdf")
 						classe = "expl-icon-pdf";
@@ -125,14 +126,19 @@
 						classe = "expl-icon-pic";
 					else if (type == ".doc" || type == ".docx")
 						classe = "expl-icon-doc";
-					else if (type == ".xls")
+					else if (type == ".xls" || type == ".csv" || type == ".xlsx")
 						classe = "expl-icon-xls";
 					else if (type == ".mp3" || type == ".flac" || type == ".flv" || type == ".ogg")
 						classe = "expl-icon-zik";
 					else
 						classe = "expl-icon-default";
 
-					html += '<li class="expl-file" data-link="' + item.link + '"><a href="#" class="expl-liste-btn">';
+					html += '<li class="expl-file"';
+					$.each(item, function (key, val){
+						if (key != "name" && key != "description")
+							html += ' data-' + key + '="' + val + '"';
+					});
+					html += '><a href="#" class="expl-liste-btn">';
 					if (classe == "expl-icon-pic")
 						html += '<img class="expl-icon-pic" />';
 					else
@@ -174,7 +180,7 @@
 				$(this).removeClass("expl-btn-down");
 				$(this).addClass("expl-btn-up");
 			}).click(function(){
-				obj.exploreFolder($(this).html());
+				obj.exploreFolder($(this).parent().attr("data-name"));
 			});
 
 			$(".expl-liste-btn").mousedown(function(){
@@ -185,6 +191,7 @@
 			}, function(){
 				$(this).removeClass("expl-btn-down");
 			}).click(function(){
+				obj.options.onItemClick($(this));
 				if ($(this).parent().hasClass("expl-folder"))
 					obj.exploreFolder($(this).parent().attr("data-link"));
 				else
@@ -235,7 +242,7 @@
 			}
 			this._generateTemplate();
 			this._initEvents();
-
+			this.options.AfterExplore();
 		},
 		goToFolder : function( folderName, startPoint, tmpNavBar ) {
 

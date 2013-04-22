@@ -68,7 +68,7 @@
 }
 
 .expl-folder, .expl-file{
-	height:50px;
+	min-height:50px;
 	width:100%;
 	border-bottom: 1px solid #ccc;
 }
@@ -79,7 +79,7 @@
 	position:relative;
 	color: #3e3e3e;
 	width:100%;
-	height:50px;
+	min-height:50px;
 }
 
 .expl-folder a:hover, .expl-file a:hover{
@@ -87,21 +87,20 @@
 }
 
 .expl-folderName, .expl-fileName{
-	position: relative;
 	margin-left: 51px;
+	padding-top:10px;
 	font-size: 0.9em;
-	top:10px;
 	display:block;
 }
 
 .expl-fileDesc, .expl-folderDesc{
-	position: relative;
 	margin-left: 51px;
 	font-size: 0.8em;
 	top:10px;
 	display:block;
 	color: grey;
 	font-style: italic;
+	max-width: 75%;
 }
 
 .expl-icon-folder{position:absolute; top:10px; left:10px; display:inline-block; width:31px; height:31px; background: url(images/folder.png); background-repeat: no-repeat; background-size: 31px 31px;}
